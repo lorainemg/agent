@@ -59,7 +59,11 @@ cd src
 2. Run the Simulation:
 
 ```bash
-python main.py
+python simulation.py
 ```
 
 3. Configuration: Modify the configuration parameters in the script to adjust the environment size (NxM), time interval t, and other settings as needed
+
+## Reports
+
+For more details, there's a full [report](https://github.com/lorainemg/agent/blob/main/doc/report.pdf) available.
