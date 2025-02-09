@@ -1,31 +1,65 @@
-# Simulation Agents
+# Agent Simulation
 
-The environment in which the agents interact is discrete and has the shape of an NxM rectangle. It is complete information, therefore all the information about it is known. The environment can vary randomly every `t` units of time, the value of t is known.
+This project simulates agents interacting within a dynamic environment, modeled as a discrete NxM grid. The environment contains various elements such as obstacles, dirt, children, a barnyard, and house robots (agents). The simulation operates in discrete time steps, with both agents and the environment undergoing changes over time.
 
-Actions performed by agents occur in turns. In one turn, the agents carry out their actions, only one for each agent, and modify the environment without it changing. In the next, the atmosphere may vary. In a unit of time, the agent's turn and the environment change turn occur.
+## Table of Contents
 
-## Description of the elements of the environment
+- [Introduction](#introduction)
+- [Environment Elements](#environment-elements)
+- [Simulation Dynamics](#simulation-dynamics)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
 
-The elements that can exist in the environment are obstacles, dirt, children, the barnyard and the agents that are called House Robots. The characteristics of the environment elements are specified below:
+## Introduction
 
-- **Obstacles:** These occupy a single space in the environment. They can be moved, by pushing them, by the children, a single square.
+The simulation aims to model the interactions between agents and a changing environment. The environment is fully observable, meaning all information about it is known to the agents. Changes in the environment occur at regular intervals, and agents perform actions in turn, modifying the environment accordingly.
 
-- **Dirt:** the dirt is for each space in the environment. It can only appear on cells that were previously empty. This either appears in the initial state or is created by the children.
+## Environment Elements
 
-- **Corral:** the corral occupies adjacent squares in a number equal to the total number of children present in the environment. The pen cannot move. Only one child can coexist in a corral box. In a space of the corral, that is empty, a robot can enter.
+The environment consists of the following elements:
 
-- **Child:** Children occupy only one space. They in the turn of the environment move, if possible, and randomly, to one of the adjacent squares. If that square is occupied by an obstacle, it is pushed by the child, if there is more than one obstacle in the direction, then they all move. If the obstacle is in a position where it cannot be pushed and the child tries to push it, then the obstacle does not move and the child occupies the same position.
+- **Obstacles**: Occupy a single cell in the grid. Children can push obstacles one cell at a time.
+- **Dirt**: Can appear in any empty cell, either initially or as a result of children's actions.
+- **Children**: Move within the environment and can push obstacles, creating dirt in the process.
+- **Barnyard**: A designated area within the grid.
+- **House Robots (Agents)**: Tasked with cleaning dirt and managing the environment.
 
-  Children are responsible for the appearance of dirt. If in a 3 by 3 grid there is only one boy, then after he moves randomly, one of the squares of the previous grid that is empty may have been soiled. If there are two children, up to 3 can get dirty. If there are three or more children, up to 6 can get dirty. If the child does not move, the decision was made that no dirt is generated.
+## Simulation Dynamics
 
-  The children, when they are in a square of the corral, do not move or dirty and if a child is captured by a House Robot, they do not move or dirty either.
-
-- **House Robot:** The House Robot is in charge of cleaning and controlling the children. The Robot moves to one of the adjacent squares, whichever you decide. It only moves one square if it does not carry a child. If you carry a child you can move up to two consecutive squares. You can also perform the actions of cleaning and carrying children. If he moves to a dirty space, on the next turn he can decide to clean or move. If he moves to a space where a child is, he immediately charges that child. At that time, Robot and child coexist in the box.
-
-  If he moves to a space in the pen that is empty, and picks up a child, he can decide whether to leave this space or continue moving. The Robot can leave the child it is carrying in any space. At that moment, the movement of the Robot stops in the turn, and Robot and child coexist until the next turn, in the same square.
+- **Time Steps**: The simulation progresses in discrete time units. Each unit comprises two phases:
+  1. **Agent Actions**: Each agent performs one action, modifying the environment.
+  2. **Environment Changes**: The environment may change randomly every `t` time units, where `t` is a known parameter.
 
 ## Objectives
 
 The goal of the Robot is to keep the house clean. It is known that if the house reaches 60% dirty boxes the Robot is fired and the simulation immediately ceases. If the Robot places all the children in the pen and 100% of the boxes are clean, the simulation also stops. These are called the final states.
 
 The objective of this project is to program the behavior of the robot for each turn, as well as the possible variations of the environment.
+
+## Installation
+
+To set up the project locally:
+
+1. **Clone the Repository**:
+
+```bash
+   git clone https://github.com/lorainemg/agent.git
+   cd agent
+```
+2. Ensure Python 3.x is Installed: The simulation is implemented in Python.
+
+## Usage
+1. Navigate to the Source Directory:
+
+```bash
+cd src
+```
+
+2. Run the Simulation:
+
+```bash
+python main.py
+```
+
+3. Configuration: Modify the configuration parameters in the script to adjust the environment size (NxM), time interval t, and other settings as needed
